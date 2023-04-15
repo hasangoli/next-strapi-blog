@@ -2,6 +2,7 @@ import { wrapper } from '@/store';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Provider } from 'react-redux';
 // Imported Styles
+import AppLayout from '@/components/Layouts/App';
 import '@/styles/globals.css';
 
 export default function App({ Component, ...rest }) {
@@ -9,17 +10,9 @@ export default function App({ Component, ...rest }) {
 
   const theme = createTheme({
     palette: {
+      mode: 'dark',
       primary: {
-        light: '#757ce8',
-        main: '#0000ff',
-        dark: '#002884',
-        contrastText: '#fff',
-      },
-      secondary: {
-        light: '#ff7961',
-        main: '#f44336',
-        dark: '#ba000d',
-        contrastText: '#000',
+        main: '#FEBC35',
       },
     },
   });
@@ -27,7 +20,9 @@ export default function App({ Component, ...rest }) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Component {...props.pageProps} />
+        <AppLayout>
+          <Component {...props.pageProps} />
+        </AppLayout>
       </ThemeProvider>
     </Provider>
   );
