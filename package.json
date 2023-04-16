@@ -1,0 +1,11 @@
+{
+  "name": "next-strapi-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "git": "git add . && git commit -m initial && git pull && git push"
+  },
+  "author": "Hasan Goli",
+  "license": "MIT"
+}
