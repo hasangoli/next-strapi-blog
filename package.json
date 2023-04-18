@@ -4,9 +4,9 @@
   "description": "A blog app with next js and strapi",
   "scripts": {
     "git": "git add . && git commit -m initial && git pull && git push",
-    "frontend": "npm run dev --prefix frontend",
     "backend": "npm run develop --prefix backend",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+    "frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "author": "Hasan Goli",
   "license": "MIT",

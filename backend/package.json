@@ -9,11 +9,14 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.9.1",
-    "@strapi/plugin-users-permissions": "4.9.1",
+    "@_sh/strapi-plugin-ckeditor": "^2.0.4",
+    "@strapi/plugin-documentation": "^4.9.1",
+    "@strapi/plugin-graphql": "^4.9.1",
     "@strapi/plugin-i18n": "4.9.1",
+    "@strapi/plugin-seo": "^1.8.0",
+    "@strapi/plugin-users-permissions": "4.9.1",
+    "@strapi/strapi": "4.9.1",
     "mysql": "2.18.1"
   },
   "author": {
