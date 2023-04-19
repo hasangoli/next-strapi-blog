@@ -1,5 +1,15 @@
 {
-  "name": "strapi",
+  "dependencies": {
+    "@strapi/plugin-graphql": "^4.0.5",
+    "fs-extra": "^10.0.0",
+    "lodash.set": "^4.3.2",
+    "mime-types": "^2.1.27",
+    "@strapi/strapi": "4.9.2",
+    "@strapi/plugin-users-permissions": "4.9.2",
+    "@strapi/plugin-i18n": "4.9.2",
+    "mysql": "2.18.1"
+  },
+  "name": "backend",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -9,21 +19,13 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "dependencies": {
-    "@_sh/strapi-plugin-ckeditor": "^2.0.4",
-    "@strapi/plugin-documentation": "^4.9.1",
-    "@strapi/plugin-graphql": "^4.9.1",
-    "@strapi/plugin-i18n": "4.9.1",
-    "@strapi/plugin-seo": "^1.8.0",
-    "@strapi/plugin-users-permissions": "4.9.1",
-    "@strapi/strapi": "4.9.1",
-    "mysql": "2.18.1"
-  },
+  "devDependencies": {},
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "9bbd0b7b-4def-42d0-9b29-0acbb50b4332"
+    "uuid": "56cf64af-8f12-4adc-9698-f75a372a0206",
+    "template": "blog"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
