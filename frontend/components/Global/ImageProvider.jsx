@@ -14,7 +14,7 @@ const ImageProvider = ({
       className={`relative ${className}`}
       style={{ width: width, aspectRatio: aspectRatio }}
     >
-      <Image src={src} alt={alt} fill quality={quality} priority={priority} />
+      <Image src={src} alt={alt} fill quality={quality} priority={priority} className='object-cover object-center'/>
     </div>
   );
 };

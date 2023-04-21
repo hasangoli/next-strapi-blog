@@ -1,7 +1,6 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -20,6 +19,12 @@ const Header = () => {
     { title: 'Authors', href: '/authors' },
     { title: 'Contact Us', href: '/contact' },
     { title: 'About Us', href: '/about' },
+  ];
+
+  const userItems = [
+    { title: 'Profile', href: '/dashboard' },
+    { title: 'Add Post', href: '/dashboard/posts/create' },
+    { title: 'Logout', href: '/logout' },
   ];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -52,7 +57,7 @@ const Header = () => {
             <IconButton
               size='large'
               aria-label='account of current user'
-              aria-controls='menu-appbar'
+              aria-controls='menuAppBar'
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
               color='inherit'
@@ -60,7 +65,7 @@ const Header = () => {
               <MenuIcon />
             </IconButton>
             <Menu
-              id='menu-appbar'
+              id='menuAppBar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -93,15 +98,11 @@ const Header = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box className='hidden md:flex flex-grow'>
             {menuItems.map((item, i) => (
-              <Button
-                key={i}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
+              <Link key={i} href={item?.href} className='mx-2 text-white block'>
                 {item?.title}
-              </Button>
+              </Link>
             ))}
           </Box>
 
@@ -119,7 +120,7 @@ const Header = () => {
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id='menu-appbar'
+              id='menuAppBar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -133,9 +134,11 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {['Profile', 'Add Post', 'Logout'].map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+              {userItems.map((item, i) => (
+                <MenuItem key={i}>
+                  <Link href={item?.href}>
+                    <Typography textAlign='center'>{item?.title}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
