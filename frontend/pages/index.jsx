@@ -9,7 +9,8 @@ const Home = ({ initialData }) => {
   const dispatch = useDispatch();
 
   const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}/articles?populate=category&populate=cover&populate=author`,
+    // `${process.env.NEXT_PUBLIC_API_URL}/articles?populate=category&populate=cover&populate=author`,
+    `http://127.0.0.1:3000/articles?populate=category&populate=cover&populate=author`,
     fetcher,
     { initialData: initialData }
   );
@@ -19,6 +20,7 @@ const Home = ({ initialData }) => {
 
   if (data) {
     dispatch(articleSlice.actions.setArticles(data?.data));
+    console.log(data?.data);
   }
 
   return (

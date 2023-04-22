@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 import ImageProvider from '../Global/ImageProvider';
 
 const Carousel = ({ slides }) => {
-  const articles = useSelector(state => state.articles);
-  console.log('Store Articles', articles);
+  const articles = useSelector(state => state.articles.data);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
