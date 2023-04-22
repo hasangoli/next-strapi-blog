@@ -9,6 +9,12 @@ const articleSlice = createSlice({
     setArticles: (state, action) => {
       state.data = action.payload;
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 

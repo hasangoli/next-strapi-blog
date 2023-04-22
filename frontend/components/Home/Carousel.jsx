@@ -2,12 +2,15 @@ import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutl
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ImageProvider from '../Global/ImageProvider';
 
-const Carousel = ({ slides }) => {
+const Carousel = () => {
+  const [slides, setSlides] = useState([]);
   const articles = useSelector(state => state.articles.data);
+  const error = useSelector(state => state.articles.error);
+  const isLoading = useSelector(state => state.articles.isLoading);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
@@ -27,11 +30,13 @@ const Carousel = ({ slides }) => {
     [emblaApi]
   );
 
+  console.log('Carousel Data: ', articles);
+
   return (
     <section className='relative'>
       <div className='overflow-hidden' ref={emblaRef}>
         <div className='flex'>
-          {slides?.map((item, i) => (
+          {articles?.map((item, i) => (
             <div key={i} className='flex-[0_0_100%] min-w-0'>
               <ImageProvider
                 src={`${process.env.NEXT_PUBLIC_BASE_URL}${item?.attributes?.cover?.data?.attributes?.url}`}

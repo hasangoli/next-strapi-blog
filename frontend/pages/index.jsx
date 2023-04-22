@@ -1,44 +1,41 @@
 import Carousel from '@/components/Home/Carousel';
 import articleSlice from '@/features/articleSlice';
-import fetcher from '@/lib/fetcher';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import useSWR from 'swr';
+import { wrapper } from '@/store';
 
-const Home = ({ initialData }) => {
-  const dispatch = useDispatch();
-
-  const { data, error, isLoading } = useSWR(
-    // `${process.env.NEXT_PUBLIC_API_URL}/articles?populate=category&populate=cover&populate=author`,
-    `http://127.0.0.1:3000/articles?populate=category&populate=cover&populate=author`,
-    fetcher,
-    { initialData: initialData }
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
-
-  if (data) {
-    dispatch(articleSlice.actions.setArticles(data?.data));
-    console.log(data?.data);
-  }
-
+const Home = () => {
   return (
     <main>
-      <Carousel slides={data?.data?.slice(0, 3)} />
+      <Carousel />
     </main>
   );
 };
 
-export const getStaticProps = async () => {
-  const response = await axios(`${process.env.NEXT_PUBLIC_API_URL}/articles`);
-  const data = await response.data;
-
-  return {
-    props: {
-      initialData: data,
-    },
-  };
-};
+export const getStaticProps = wrapper.getStaticProps(
+  store =>
+    async ({ preview }) => {
+      // axios(`${process.env.NEXT_PUBLIC_API_URL}/articles`)
+      //   .then(res => res.data)
+      //   .then(data =>
+      //     store.dispatch(articleSlice.actions.setArticles(data.data))
+      //   )
+      //   .catch(err => console.log(err));
+      // store.dispatch(
+      //   articleSlice.actions.setArticles([
+      //     { id: 0, attributes: { title: 'Article No 01' } },
+      //   ])
+      // );
+      store.dispatch(
+        articleSlice.actions.setArticles([
+          {
+            id: 0,
+            attributes: {
+              title: 'Article No 01',
+              cover: { data: { attributes: { url: '' } } },
+            },
+          },
+        ])
+      );
+    }
+);
 
 export default Home;
