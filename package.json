@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A blog app with next js and strapi",
   "scripts": {
-    "git": "git add . && git commit -m initial && git pull && git push",
     "backend": "npm run develop --prefix backend",
     "frontend": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "git": "git add . && git commit -m initial && git pull && git push"
   },
   "author": "Hasan Goli",
   "license": "MIT",

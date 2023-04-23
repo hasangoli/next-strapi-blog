@@ -8,13 +8,21 @@ const ImageProvider = ({
   quality = 100,
   priority = false,
   className,
+  height = 'auto',
 }) => {
   return (
     <div
       className={`relative ${className}`}
-      style={{ width: width, aspectRatio: aspectRatio }}
+      style={{ width: width, aspectRatio: aspectRatio, height }}
     >
-      <Image src={src} alt={alt} fill quality={quality} priority={priority} className='object-cover object-center'/>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        quality={quality}
+        priority={priority}
+        className='object-cover object-center'
+      />
     </div>
   );
 };

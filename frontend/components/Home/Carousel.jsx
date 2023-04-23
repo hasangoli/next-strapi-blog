@@ -21,8 +21,6 @@ const Carousel = () => {
     getArticles();
   }, []);
 
-  console.log(slides);
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
       delay: 3000,
