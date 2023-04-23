@@ -1,16 +1,27 @@
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import axios from 'axios';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import { useCallback, useEffect, useState } from 'react';
 import ImageProvider from '../Global/ImageProvider';
 
 const Carousel = () => {
   const [slides, setSlides] = useState([]);
-  const articles = useSelector(state => state.articles.data);
-  const error = useSelector(state => state.articles.error);
-  const isLoading = useSelector(state => state.articles.isLoading);
+
+  useEffect(() => {
+    const getArticles = async () => {
+      axios(`${process.env.NEXT_PUBLIC_API_URL}/articles?populate=cover`)
+        .then(res => res.data)
+        .then(data => setSlides(data?.data?.slice(0, 3)))
+        .catch(err => console.log(err));
+    };
+
+    getArticles();
+  }, []);
+
+  console.log(slides);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
@@ -30,14 +41,16 @@ const Carousel = () => {
     [emblaApi]
   );
 
-  console.log('Carousel Data: ', articles);
-
   return (
     <section className='relative'>
       <div className='overflow-hidden' ref={emblaRef}>
         <div className='flex'>
-          {articles?.map((item, i) => (
-            <div key={i} className='flex-[0_0_100%] min-w-0'>
+          {slides?.map((item, i) => (
+            <Link
+              href={'#'}
+              key={i}
+              className='relative flex-[0_0_100%] min-w-0'
+            >
               <ImageProvider
                 src={`${process.env.NEXT_PUBLIC_BASE_URL}${item?.attributes?.cover?.data?.attributes?.url}`}
                 width={'100%'}
@@ -45,7 +58,13 @@ const Carousel = () => {
                 alt=''
                 className={'max-h-[500px]'}
               />
-            </div>
+              <div className='absolute bottom-8 left-[50%] translate-x-[-50%] p-4 bg-darker/70 rounded-lg text-center'>
+                <h3 className='mb-2 md:text-2xl'>{item?.attributes?.title}</h3>
+                <p className='hidden sm:block'>
+                  {item?.attributes?.description}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
