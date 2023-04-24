@@ -1,9 +1,11 @@
-const { createSlice } = require('@reduxjs/toolkit');
+import { HYDRATE } from "next-redux-wrapper";
+
+const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = { data: [], error: false, isLoading: true };
 
 const articleSlice = createSlice({
-  name: 'articles',
+  name: "articles",
   initialState,
   reducers: {
     setArticles: (state, action) => {
@@ -15,6 +17,11 @@ const articleSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, action) => {
+      return { ...state, ...action.payload };
+    });
   },
 });
 
