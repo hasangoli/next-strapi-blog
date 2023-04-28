@@ -1,22 +1,21 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import BlogItem from '../Global/BlogItem';
 
 const Content = () => {
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
+  const articles = [];
 
-  useEffect(() => {
-    const getArticles = async () => {
-      axios(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles?sort=date:desc&populate=*`
-      )
-        .then(res => res.data)
-        .then(data => setArticles(data?.data))
-        .catch(err => console.log(err));
-    };
+  // useEffect(() => {
+  //   const getArticles = async () => {
+  //     axios(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/articles?sort=date:desc&populate=*`
+  //     )
+  //       .then(res => res.data)
+  //       .then(data => setArticles(data?.data))
+  //       .catch(err => console.log(err));
+  //   };
 
-    getArticles();
-  }, []);
+  //   getArticles();
+  // }, []);
 
   return (
     <section className='container my-16'>
@@ -29,7 +28,7 @@ const Content = () => {
       </div>
 
       <div className='mt-16'>
-        <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4'>
           {articles?.slice(0, 1).map(article => (
             <BlogItem item={article} key={article.id} />
           ))}
